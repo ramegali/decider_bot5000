@@ -18,14 +18,14 @@ def decider_bot():
 	print "This is Decider Bot..."
 	print "I guess it's time to make a decision."
 	ready_status = raw_input("Are you ready? ")
-	if 'y' in ready_status:
+	if 'ye' in ready_status:
 		food_decision = what_food()
 	else:
 		print "Take your time... I'll be around if you need me...."
 		exit()
 	print "So... would you like me to search nearby places for", food_decision, "?"	
 	ans = raw_input()
-	if 'y' in ans:
+	if 'ye' in ans:
 		here_we_go(food_decision)
 	else:
 		print "Ok, fine."
@@ -52,11 +52,11 @@ def here_we_go(food_choice):
 	list_of_results = food_seeker_bot(city.title(), state.upper(), number_of_pages, food_choice)
 	print "Thank you, Food Seeker Bot... Would you like to view Food Seeker Bot's full results (includes address, phone number, and link to webpage)?"
 	ans = raw_input()
-	if 'y' in ans:
+	if 'ye' in ans:
 		display_results(list_of_results)
 	print "Would you like me to decide which of the above options to take?"
 	ans = raw_input()
-	if 'y' in ans:
+	if 'ye' in ans:
 		final_destination(list_of_results)
 	else:
 		print "Ok have fun making decisions on your own."
