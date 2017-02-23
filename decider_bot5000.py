@@ -6,7 +6,7 @@
 # >> ****FIXED**** Dictionary within dictionary is not working properly. Second dictionary's info
 # 		is overriding information in all other dictionary entries so that
 #		EVERY location ends up with the same website/address/phone.
-
+# >> Check for invalid city/state
 
 from sys import exit
 from bs4 import BeautifulSoup
