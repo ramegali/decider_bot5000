@@ -89,7 +89,7 @@ def get_results(filters):
 def display_results(results):
     i = 0
     print "Okay whatever, here they are: \n\n"
-    for placesf in results:
+    for places in results:
         print "%s \n\tRATING: %s \n\tPRICE: %s \n\tADDRESS: %s, %s %s %s \n\tPHONE: %s \n" % (
             results[i]['name'], results[i]['rating'], results[i]['price'],
             results[i]['location']['address1'], results[i]['location']['city'], results[i]['location']['state'],
