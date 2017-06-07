@@ -87,7 +87,7 @@ def display_results(results):
 
 def your_destiny(results):
     destiny = random.randint(0, len(results) - 1)
-    print "Alright, here's what I picked for you I hope you're satisfied: %s\n" % (results[destiny]['name'])
+    print "Alright, here's what I picked for you I hope you're satisfied: ", results[destiny]['name'], "\n"
 
 
 if __name__ == "__main__":
