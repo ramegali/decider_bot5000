@@ -24,5 +24,6 @@ And VOILA you now have a place to go!
 
 ### KNOWN BUGS
 - [x] ~~Error getting prices for some locales causing it to crash on display.~~ Added try block.
+- [ ] Nothing in place to catch invalid zipcodes or price parameters.
 
 **DISCLAIMER:** Not responsible for bad or otherwise unsatisfactory dining experiences. Follow Decider Bot's sage advice at your own discretion.
