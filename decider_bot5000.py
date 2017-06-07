@@ -1,26 +1,13 @@
 # Raphael Megali copyright 2017
-# Version 2.0.1
+# Version 2.1.1
 
-# gonna have to hide the access token etc
 
-from sys import exit
-import requests
-import random
+from sys import exit, path
+import requests, random
+from client_credentials import access_token 
 
-app_id = '39FHtcp39Nb-Khyzt6S_fw'
-app_secret = 'Gon9cUcLnZnecCwBvWEEP2rCPy5p9VTQabwfW9857k9l0ncLKbieRjw296U3Cia7'
-access_token = 'jC7h77ZwjBZfsg90k0JkTs3AWcwU1i2P3jJPtZEnYGlCabGOiG5dJntMml4-bACEunICfkGdK-hYbgL_R8Qn1CdySDgRMIsviLMepTccLe_Kpspi5XLK6zu90pgQWXYx'  # token.json()['access_token']
 url = 'https://api.yelp.com/v3/businesses/search'
 headers = {'Authorization': 'bearer %s' % access_token}
-
-
-# Don't really need this section, at least not for now,
-# since we already have the access token
-
-# data = {'grant_type': 'client_credentials',
-#        '39FHtcp39Nb-Khyzt6S_fw': app_id,
-#        'Gon9cUcLnZnecCwBvWEEP2rCPy5p9VTQabwfW9857k9l0ncLKbieRjw296U3Cia7': app_secret}
-# token = requests.post('https://api.yelp.com/oauth2/token', data=data)
 
 def decider_bot():
     print "sigh . . ."
@@ -72,7 +59,7 @@ def get_results(filters):
     params = {'location': filters['location'],
               'term': filters['term'],
               'pricing_filter': filters['price'],
-              # 'sort_by': 'rating'
+              'sort_by': 'rating'
               }
 
     # get the info
@@ -87,16 +74,16 @@ def get_results(filters):
 
 
 def display_results(results):
-    i = 0
     print "Okay whatever, here they are: \n\n"
-    for placesf in results:
-        print "%s \n\tRATING: %s \n\tPRICE: %s \n\tADDRESS: %s, %s %s %s \n\tPHONE: %s \n" % (
-            results[i]['name'], results[i]['rating'], results[i]['price'],
-            results[i]['location']['address1'], results[i]['location']['city'], results[i]['location']['state'],
-            results[i]['location']['zip_code'],
-            results[i]['display_phone'])
-        i += 1
-
+    for places in results:
+		print places['name']
+		print "\tRATING: ", places['rating']
+		try:
+			print "\tPRICE: ", places['price']
+		except:
+			print "No pricing info available"
+		print "\tADDRESS: ", places['location']['address1'], ", ", places['location']['city'], places['location']['state'], places['location']['zip_code']
+		print "\tPHONE: ", places['display_phone'], "\n"
 
 def your_destiny(results):
     destiny = random.randint(0, len(results) - 1)
