@@ -3,7 +3,7 @@
 
 
 from sys import exit, path
-import requests, random
+import requests, random, re
 from client_credentials import access_token 
 
 url = 'https://api.yelp.com/v3/businesses/search'
@@ -43,12 +43,16 @@ def get_filters(food_choice):
     filters = {}
     print "Alright. Well, I'm going to need some parameters before we begin..."
     location = raw_input("Please give me the zip code of the city/town where we're searching: ")
+    while re.match(r'([\d][\d][\d][\d][\d])', location) is None:
+        location = raw_input("Invalid zipcode. Try again: ")
     price = raw_input("On a scale of 1 to 4, how pricy do you wanna get? ")
+    while re.match(r'^[1-4]', price) is None:
+        price = raw_input("From 1 to 4 only, please: ")
     # OTHER POSSIBILITIES INCLUDE:
     # sort_by <-- parameter to sort by best_match (default), rating, review_count, or distance
     # limit <-- number of businesses to return (default 20, max 50)
     # transactions <-- can the place do delivery, pickup, or restaurant_reservation?
-
+    
     filters['location'] = location
     filters['price'] = price
     filters['term'] = food_choice
@@ -76,14 +80,14 @@ def get_results(filters):
 def display_results(results):
     print "Okay whatever, here they are: \n\n"
     for places in results:
-		print places['name']
-		print "\tRATING: ", places['rating']
-		try:
-			print "\tPRICE: ", places['price']
-		except:
-			print "No pricing info available"
-		print "\tADDRESS: ", places['location']['address1'], ", ", places['location']['city'], places['location']['state'], places['location']['zip_code']
-		print "\tPHONE: ", places['display_phone'], "\n"
+        print places['name']
+        print "\tRATING: ", places['rating']
+        try:
+            print "\tPRICE: ", places['price']
+        except:
+            print "No pricing info available"
+        print "\tADDRESS: ", places['location']['address1'], ", ", places['location']['city'], places['location']['state'], places['location']['zip_code']
+        print "\tPHONE: ", places['display_phone'], "\n"
 
 def your_destiny(results):
     destiny = random.randint(0, len(results) - 1)
